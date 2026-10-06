@@ -27,25 +27,35 @@ function criarElementoTarefa(tarefa) {
     const botao = document.createElement('button')
     botao.classList.add('app_button-edit')
 
-    const imagembotao = document.createElement('img')
+    botao.onclick = () => {
+        const novaDescricao = prompt("Qual é o novo nome da tarefa?")
+    }
 
+    const imagembotao = document.createElement('img')
     imagembotao.setAttribute('src', '/imagens/edit.png')
     botao.append(imagembotao)
 
     li.append(svg)
     li.append(paragrafo)
     li.append(botao)
+
+    return li
 }
 btnAdicionarTarefa.addEventListener('click', () => {
     formAdicionarTarefa.classList.toggle('hidden')
 })
+
 formAdicionarTarefa.addEventListener('submit', (evento) => {
     evento.preventDefault();
     const tarefa = {
         descricao: textarea.value
     }
     tarefas.push(tarefa)
+    const elementoTarefa = criarElementoTarefa(tarefa)
+    ulTarefas.append(elementoTarefa)
     localStorage.setItem('tarefas', JSON.stringify(tarefas))
+    textarea.value = ''
+    formAdicionarTarefa.classList.add('hidden')
 
 })
 
